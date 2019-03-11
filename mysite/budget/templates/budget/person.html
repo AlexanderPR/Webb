@@ -1,0 +1,43 @@
+<html>
+    {% extends 'budget/base.html' %}
+    {% load static %}
+    <head>
+
+    </head>
+
+    <body>
+        {% block left-column %}
+
+        {% endblock %}
+
+        {% block content %}
+        {% for person in persons %}
+        <div id="persons">
+            <a href="{% url 'detail' person.id %}">
+                <table id="outer-person-table">
+                    <td>
+                        <table id="inner-table-overview">
+                            <td><img src="{% static 'budget/avatar_dummy.png' %}" ></img></td>
+                            <tr><td>{{ person }}</td></tr>
+                            <tr><td>{{ person.income }}</td></tr>
+                        </table>
+                    </td>
+
+                    <td valign="top">
+                        <table id="inner-table-desc">
+                            <tr><td>
+                                {{person.description}}
+
+                            </td></tr>
+                        </table>    
+
+                    </td>
+                </table>
+            </a>
+        </div>
+
+
+        {% endfor %}
+        {% endblock %}
+    </body>
+</html>

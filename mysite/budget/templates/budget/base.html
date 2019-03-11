@@ -1,0 +1,33 @@
+<html>
+  {% load static %}    
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Test</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'budget/style.css' %}">
+</head>
+
+<body>
+  <div class="header"></div>
+  <div class="topnav">
+          <a href="/">Home</a>
+          <a href="/persons">Persons</a>
+          <a href="/person/add">Add person</a>
+          <a href="/upload">Upload a file</a>
+  </div>
+
+  <div class="left-column">
+    {% block left-column %}
+    {% endblock %}
+  </div>
+
+  <div class="main-content">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  <div class="right-column">
+      {% block right-column %}
+      {% endblock %}
+    </div>
+</body>
+</html>

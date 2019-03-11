@@ -1,0 +1,20 @@
+{% extends 'budget/base.html' %}
+
+{% block left-column %}
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+    <br>
+
+{{text.first_name}} {{text.last_name}} {{text.income}}
+<br>
+{% endblock %}
+
+{% block right-column %}
+this
+{% endblock %}
