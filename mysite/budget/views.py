@@ -1,18 +1,18 @@
 from django.shortcuts import render, HttpResponse
 from django.views.generic import TemplateView
-from .models import Person
+from .models import Person, Stock_history
 from django.http import Http404, HttpResponseRedirect
 from .forms import NameForm, UploadFileForm
 
-from .back import handle_uploaded_file
+from .back import handle_uploaded_file, read_file
 
-def index(request):
-    persons = Person.objects.all()
-
-    context = {
-        'persons': persons,
-    }
-    return render(request, 'budget/index.html', context)
+class IndexView(TemplateView):
+    def get(self, request):
+        price_history = Stock_history.objects.all()
+        context = {
+            'hist': price_history
+        }
+        return render(request, 'budget/index.html', context)
 
 class DetailView(TemplateView):
     def get(self, request, person_id):
@@ -78,7 +78,8 @@ class UploadView(TemplateView):
             form = UploadFileForm(request.POST, request.FILES)
             if form.is_valid():
                 handle_uploaded_file(request.FILES['file'])
+                read_file(request.FILES['file'])
                 return HttpResponseRedirect('/upload')
-        else:
-            form = UploadFileForm()
+        #else:
+         #   form = UploadFileForm()
         return render(request, self.template_name, {'form': form})
