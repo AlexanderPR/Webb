@@ -1,21 +1,53 @@
 <!DOCTYPE html>
+<head>
+<script>
+function stockSearch(){
+    var input, filter, table, tr;
+    input = document.getElementById("stock-input");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("stock-table")
+    tr = table.getElementsByTagName("tr")
+    console.log(tr.length)
 
+    for (i=0; i < tr.length; i++){
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td){
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+               tr[i].style.display = "";
+            }
+            else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+</script>
+</head>
 {% extends 'budget/base.html' %}
 
+<body>
 {% block left-column %}
 {% endblock %}
 
 {% block content %}
-<table>
-<th>
+<input type="text" id="stock-input" onkeyup="stockSearch()" placeholder="Search stock..." title="Type in a name">
+<table id="stock-table">
+<tr class="header">
 <td>Stock</td>
+<td>Date</td>
 <td>Open</td>
-</th>
+<td>Close</td>
+<td>Volume</td>
+</tr>
 {% for e in entry %}
 
 <tr>
     <td>{{ e.name}}</td>
-    <td>{{ e.p_open}} </td>
+    <td>{{ e.date}}</td>
+    <td>{{ e.p_open | floatformat:2}} </td>
+    <td>{{ e.close | floatformat:2}} </td>
+    <td>{{ e.volume}} </td>
 </tr>
 {% endfor %}
 </table>
@@ -23,3 +55,7 @@
 
 {% block right-column %}
 {% endblock %}
+
+
+
+</body>
