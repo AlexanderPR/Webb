@@ -15,14 +15,14 @@ def read_file(file):
             if i > 0:
                 try:
                     p = Stock_history(
-                        _name = file.name,
-                        _date = row[0],
-                        _open = row[1],
-                        _high = row[2],
-                        _low = row[3],
-                        _close = row[4],
-                        _adj_close = row[5],
-                        _volume = row[6]
+                        name = file.name,
+                        date = row[0],
+                        p_open = row[1],
+                        high = row[2],
+                        low = row[3],
+                        close = row[4],
+                        adj_close = row[5],
+                        volume = row[6]
                     )
                     p.save()
                 except:

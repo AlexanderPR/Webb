@@ -10,7 +10,7 @@ class IndexView(TemplateView):
     def get(self, request):
         price_history = Stock_history.objects.all()
         context = {
-            'hist': price_history
+            'entry': price_history
         }
         return render(request, 'budget/index.html', context)
 
